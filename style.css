@@ -56,16 +56,8 @@ body {
 }
 
 /* ===================================
-   Disable Cyber-Style Animated Background
+   Disable Cyber-Style Animated Background (only)
    =================================== */
-body::before,
-body::after {
-    content: none;
-    animation: none;
-    background: none;
-}
-
-.particles-container,
 .cyber-grid,
 .cyber-lines,
 .circuit-pattern,

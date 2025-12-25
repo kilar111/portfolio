@@ -1,10 +1,12 @@
 // ===================================
 // Animated Background Particles
 // ===================================
-const ENABLE_ANIMATED_BACKGROUND = false;
+const ENABLE_PARTICLES_BACKGROUND = true;
+const ENABLE_CYBER_BACKGROUND = false;
+const ENABLE_MATRIX_BACKGROUND = false;
 
 function createParticles() {
-    if (!ENABLE_ANIMATED_BACKGROUND) return;
+    if (!ENABLE_PARTICLES_BACKGROUND) return;
     const container = document.getElementById('particlesContainer');
     if (!container) return;
     const particleCount = 30;
@@ -43,7 +45,7 @@ window.addEventListener('load', createParticles);
 // Cyber Circuit Pattern Generator
 // ===================================
 function createCircuitPattern() {
-    if (!ENABLE_ANIMATED_BACKGROUND) return;
+    if (!ENABLE_CYBER_BACKGROUND) return;
     const container = document.getElementById('circuitPattern');
     if (!container) return;
     const width = window.innerWidth;
@@ -97,7 +99,7 @@ function createCircuitPattern() {
 // Data Stream Animation
 // ===================================
 function createDataStream() {
-    if (!ENABLE_ANIMATED_BACKGROUND) return;
+    if (!ENABLE_CYBER_BACKGROUND) return;
     const container = document.getElementById('dataStream');
     if (!container) return;
     const streamCount = 12;
@@ -195,13 +197,13 @@ class MatrixRain {
 // Initialize Matrix Rain
 let matrixRain;
 window.addEventListener('load', () => {
-    if (!ENABLE_ANIMATED_BACKGROUND) return;
+    if (!ENABLE_MATRIX_BACKGROUND) return;
     matrixRain = new MatrixRain();
 });
 
 // Handle resize
 window.addEventListener('resize', () => {
-    if (!ENABLE_ANIMATED_BACKGROUND) return;
+    if (!ENABLE_MATRIX_BACKGROUND) return;
     if (matrixRain) {
         matrixRain.resize();
     }
