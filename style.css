@@ -55,6 +55,26 @@ body {
     position: relative;
 }
 
+/* ===================================
+   Disable Cyber-Style Animated Background
+   =================================== */
+body::before,
+body::after {
+    content: none;
+    animation: none;
+    background: none;
+}
+
+.particles-container,
+.cyber-grid,
+.cyber-lines,
+.circuit-pattern,
+.data-stream,
+.neon-overlay,
+.matrix-canvas {
+    display: none !important;
+}
+
 /* Animated background gradient */
 body::before {
     content: '';
@@ -2813,4 +2833,5 @@ ul {
         bottom: 20px;
         right: 20px;
     }
+}
 }
