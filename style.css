@@ -62,8 +62,7 @@ body {
 .cyber-lines,
 .circuit-pattern,
 .data-stream,
-.neon-overlay,
-.matrix-canvas {
+.neon-overlay {
     display: none !important;
 }
 
@@ -533,7 +532,7 @@ ul {
     width: 100%;
     height: 100%;
     z-index: 0;
-    opacity: 0.08;
+    opacity: 0.05;
     pointer-events: none;
 }
 

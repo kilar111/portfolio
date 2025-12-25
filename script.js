@@ -3,7 +3,7 @@
 // ===================================
 const ENABLE_PARTICLES_BACKGROUND = true;
 const ENABLE_CYBER_BACKGROUND = false;
-const ENABLE_MATRIX_BACKGROUND = false;
+const ENABLE_MATRIX_BACKGROUND = true;
 
 function createParticles() {
     if (!ENABLE_PARTICLES_BACKGROUND) return;
@@ -129,24 +129,38 @@ class MatrixRain {
     constructor() {
         this.canvas = document.getElementById('matrixCanvas');
         if (!this.canvas) return;
+
+        const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+        if (prefersReducedMotion) return;
         
         this.ctx = this.canvas.getContext('2d');
         this.characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
         this.fontSize = 14;
         this.columns = 0;
         this.drops = [];
+
+        this.fps = 12;
+        this.frameIntervalMs = 1000 / this.fps;
+        this.lastFrameTime = 0;
+        this.running = true;
         
         this.init();
-        this.animate();
+        this.attachVisibilityHandlers();
+        this.animate(0);
     }
     
     init() {
-        // Set canvas size
-        this.canvas.width = this.canvas.offsetWidth;
-        this.canvas.height = this.canvas.offsetHeight;
+        const cssWidth = this.canvas.offsetWidth;
+        const cssHeight = this.canvas.offsetHeight;
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        this.canvas.width = Math.floor(cssWidth * dpr);
+        this.canvas.height = Math.floor(cssHeight * dpr);
+
+        this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         
         // Calculate columns
-        this.columns = Math.floor(this.canvas.width / this.fontSize);
+        this.columns = Math.floor(cssWidth / this.fontSize);
         
         // Initialize drops
         this.drops = [];
@@ -157,11 +171,11 @@ class MatrixRain {
     
     draw() {
         // Semi-transparent black to create fade effect
-        this.ctx.fillStyle = 'rgba(10, 10, 15, 0.05)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = 'rgba(10, 10, 15, 0.06)';
+        this.ctx.fillRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
         
-        // Matrix rain color (cyan/blue)
-        this.ctx.fillStyle = '#4facfe';
+        // Matrix rain color (cyan/blue) - keep subtle
+        this.ctx.fillStyle = 'rgba(79, 172, 254, 0.55)';
         this.ctx.font = `${this.fontSize}px monospace`;
         
         // Draw characters
@@ -178,15 +192,29 @@ class MatrixRain {
             }
             
             // Move drop down slowly
-            this.drops[i] += 0.3;
+            this.drops[i] += 0.22;
         }
     }
     
-    animate() {
-        this.draw();
-        setTimeout(() => {
-            requestAnimationFrame(() => this.animate());
-        }, 50); // Slow down the animation (50ms delay)
+    animate(timestamp) {
+        if (!this.running) return;
+
+        if (timestamp - this.lastFrameTime >= this.frameIntervalMs) {
+            this.lastFrameTime = timestamp;
+            this.draw();
+        }
+
+        requestAnimationFrame((t) => this.animate(t));
+    }
+
+    attachVisibilityHandlers() {
+        document.addEventListener('visibilitychange', () => {
+            this.running = document.visibilityState === 'visible';
+            if (this.running) {
+                this.lastFrameTime = 0;
+                requestAnimationFrame((t) => this.animate(t));
+            }
+        });
     }
     
     resize() {
