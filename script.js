@@ -10,7 +10,7 @@ function createParticles() {
     const container = document.getElementById('particlesContainer');
     if (!container) return;
     const particleCount = 30;
-    const colors = ['rgba(102, 126, 234, 0.3)', 'rgba(79, 172, 254, 0.3)', 'rgba(118, 75, 162, 0.3)', 'rgba(0, 242, 254, 0.2)'];
+    const colors = ['rgba(102, 126, 234, 0.12)', 'rgba(79, 172, 254, 0.12)', 'rgba(118, 75, 162, 0.12)', 'rgba(0, 242, 254, 0.10)'];
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -27,12 +27,12 @@ function createParticles() {
         // Random color from array
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
         
-        // Random animation duration (15s to 30s)
-        const duration = Math.random() * 15 + 15;
+        // Random animation duration (30s to 60s) - slower
+        const duration = Math.random() * 30 + 30;
         particle.style.animationDuration = `${duration}s`;
         
-        // Random delay (0 to 15s)
-        particle.style.animationDelay = `${Math.random() * 15}s`;
+        // Random delay (0 to 25s)
+        particle.style.animationDelay = `${Math.random() * 25}s`;
         
         container.appendChild(particle);
     }
