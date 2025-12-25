@@ -2,8 +2,8 @@
 // Animated Background Particles
 // ===================================
 const ENABLE_PARTICLES_BACKGROUND = true;
-const ENABLE_CYBER_BACKGROUND = false;
-const ENABLE_MATRIX_BACKGROUND = true;
+const ENABLE_CYBER_BACKGROUND = true;
+const ENABLE_MATRIX_BACKGROUND = false;
 
 function createParticles() {
     if (!ENABLE_PARTICLES_BACKGROUND) return;

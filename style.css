@@ -56,13 +56,9 @@ body {
 }
 
 /* ===================================
-   Disable Cyber-Style Animated Background (only)
+   Disable Matrix Background (only)
    =================================== */
-.cyber-grid,
-.cyber-lines,
-.circuit-pattern,
-.data-stream,
-.neon-overlay {
+.matrix-canvas {
     display: none !important;
 }
 
