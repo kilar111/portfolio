@@ -431,7 +431,7 @@ contactForm.addEventListener('submit', (e) => {
     const message = document.getElementById('message').value;
     
         // Create mailto link or implement your form submission logic
-        const mailtoLink = `mailto:akilatharuka26@gamil.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        const mailtoLink = `mailto:akilatharuka26@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
     
     window.location.href = mailtoLink;
     
@@ -645,4 +645,4 @@ window.addEventListener('load', () => {
 console.log('%c👋 Hi! I\'m Akila Tharuka', 'font-size: 20px; font-weight: bold; color: #667eea;');
 console.log('%c🚀 Full-Stack Web Developer', 'font-size: 14px; color: #4facfe;');
 console.log('%c💼 Looking for opportunities? Let\'s connect!', 'font-size: 12px; color: #764ba2;');
-    console.log('%c📧 akilatharuka26@gamil.com', 'font-size: 12px; color: #00f2fe;');
+    console.log('%c📧 akilatharuka26@gmail.com', 'font-size: 12px; color: #00f2fe;');
