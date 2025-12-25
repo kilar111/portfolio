@@ -371,17 +371,27 @@ scrollTopBtn.addEventListener('click', () => {
 // ===================================
 // Animated Counter for Stats
 // ===================================
-function animateCounter(element, target, duration = 2000) {
+function parseNumberAndSuffix(text) {
+    const trimmed = (text ?? '').toString().trim();
+    const match = trimmed.match(/^(-?\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return { value: 0, suffix: '' };
+    return {
+        value: Number(match[1]),
+        suffix: (match[2] ?? '').trim()
+    };
+}
+
+function animateCounter(element, target, suffix = '', duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16); // 60fps
     
     const timer = setInterval(() => {
         start += increment;
         if (start >= target) {
-            element.textContent = target + '+';
+            element.textContent = `${target}${suffix}`;
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(start) + '+';
+            element.textContent = `${Math.floor(start)}${suffix}`;
         }
     }, 16);
 }
@@ -392,8 +402,9 @@ const statsObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const statNumbers = entry.target.querySelectorAll('.stat-item h4');
             statNumbers.forEach(stat => {
-                const target = parseInt(stat.textContent);
-                animateCounter(stat, target);
+                const { value, suffix } = parseNumberAndSuffix(stat.textContent);
+                const target = Number.isFinite(value) ? Math.floor(value) : 0;
+                animateCounter(stat, target, suffix);
             });
             statsObserver.unobserve(entry.target);
         }
